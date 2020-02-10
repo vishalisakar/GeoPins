@@ -13,7 +13,7 @@ const Login = ({ classes }) => {
     try {
       const idToken = googleUser.getAuthResponse().id_token;
 
-      console.log({ idToken });
+      // console.log({ idToken });
       /* sending the id token to the server  */
       const client = new GraphQLClient("http://localhost:4000/graphql", {
         headers: { authorization: idToken }
@@ -27,6 +27,10 @@ const Login = ({ classes }) => {
         type: "LOGIN_USER",
         payload: me
       });
+      dispatch({
+        type: "IS_LOGGED_IN",
+        payload: googleUser.isSignedIn()
+      });
     } catch (err) {
       onFailure(err);
     }
@@ -39,21 +43,21 @@ const Login = ({ classes }) => {
   return (
     <div className={classes.root}>
       <Typography
-      component='h1'
-      variant="h3"
-      gutterBottom
-      noWrap
-      style={ { color : 'rgb(66, 133, 244)' }}
+        component="h1"
+        variant="h3"
+        gutterBottom
+        noWrap
+        style={{ color: "rgb(66, 133, 244)" }}
       >
         Welcome
       </Typography>
-    <GoogleLogin
-      clientId="129370408827-bmd6hinonuaqmuhpk81ekl5pioba2vmv.apps.googleusercontent.com"
-      onSuccess={onSuccess}
-      onFailure={onFailure}
-      isSignedIn={true}
-      theme='dark'
-    />
+      <GoogleLogin
+        clientId="129370408827-bmd6hinonuaqmuhpk81ekl5pioba2vmv.apps.googleusercontent.com"
+        onSuccess={onSuccess}
+        onFailure={onFailure}
+        isSignedIn={true}
+        theme="dark"
+      />
     </div>
   );
 };
