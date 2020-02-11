@@ -6,6 +6,14 @@ const typeDefs = require("./typeDefs");
 const resolvers = require("./resolvers");
 const { findOrCreateUser } = require('./controllers/userController')
 
+//  getMapApi();
+
+/* unction getMapBoxApi (){
+    const mapboxApi = process.env.MAPBOX_TOKEN;
+   console.log(mapboxApi)
+   return mapApi;
+}
+ */
 /* connecting the Database with the server */
 
 mongoose
@@ -43,3 +51,7 @@ const server = new ApolloServer({
 server.listen().then(({ url }) => {
   console.log(`server listening on ${url}`);
 });
+
+
+  
+

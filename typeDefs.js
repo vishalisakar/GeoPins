@@ -6,6 +6,7 @@ module.exports = gql`
     name: String
     email: String
     picture: String
+    geopins: [Pin]
   }
 
   type Pin {
@@ -21,12 +22,21 @@ module.exports = gql`
   }
 
   type Comment {
+    _id: ID
     text: String
     createdAt: String
     author: User
   }
 
-  type Query {
-    me: User
+  type mapboxApi {
+    apiKey: String
   }
+
+  type Query {
+    getUser: User
+    getMapboxKey: mapboxApi 
+    
+  }
+
+ 
 `;

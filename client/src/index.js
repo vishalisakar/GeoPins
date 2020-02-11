@@ -24,7 +24,7 @@ const Root = () => {
         <ProtectedRoute exact path="/" component={App} />
         <Route path="/login" component={Splash} />
       </Switch>
-      </Context.Provider>
+      </Context.Provider> 
     </Router>
   );
 };

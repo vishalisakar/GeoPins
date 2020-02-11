@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { GraphQLClient } from "graphql-request";
 import { GoogleLogin } from "react-google-login";
 import { withStyles } from "@material-ui/core/styles";
-import { ME_QUERY } from "../../graphql/queries";
+import { USER_QUERY } from "../../graphql/queries";
 import Context from "../../context";
 import Typography from "@material-ui/core/Typography";
 
@@ -11,15 +11,17 @@ const Login = ({ classes }) => {
 
   const onSuccess = async googleUser => {
     try {
-      const idToken = googleUser.getAuthResponse().id_token;
+      const idToken = await googleUser.getAuthResponse().id_token;
+
 
       // console.log({ idToken });
       /* sending the id token to the server  */
-      const client = new GraphQLClient("http://localhost:4000/graphql", {
+      const url = "http://localhost:4000/graphql";
+      const client = new GraphQLClient(url, {
         headers: { authorization: idToken }
       });
 
-      const { me } = await client.request(ME_QUERY);
+      const { me } = await client.request(USER_QUERY);
       console.log(`After the verification of user with the server :`, { me });
 
       /* update the state */

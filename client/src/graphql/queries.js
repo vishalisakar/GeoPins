@@ -1,7 +1,7 @@
 
- export const ME_QUERY = `
+ export const USER_QUERY = `
  {
-  me{
+  getUser {
     _id
     name
     email
@@ -9,3 +9,13 @@
   }
 }
 `;  
+
+export const MAPBOX_API = `
+{
+  getMapboxKey {
+    apiKey
+  }
+}
+
+ 
+`;
