@@ -17,6 +17,7 @@ const Root = () => {
   const[state, dispatch] =  useReducer(reducer,initialState)
 
   console.log( `After the state updated`, {state})
+  
   return (
     <Router>
       <Context.Provider value={ { state, dispatch }}>

@@ -19,3 +19,35 @@ export const MAPBOX_API = `
 
  
 `;
+
+export const GET_PINS_Query =`
+{
+  getPins{
+    _id
+    createdAt
+    title
+    content
+    image
+    latitude
+    longitude
+  
+     author{
+      _id
+      name
+    email
+      picture
+    }
+    comments{
+      text
+      createdAt
+      author{
+        _id
+        name
+        email
+        picture
+      }
+    }
+    
+  }
+}
+`;

@@ -6,7 +6,8 @@ module.exports = gql`
     name: String
     email: String
     picture: String
-    geopins: [Pin]
+ 
+    
   }
 
   type Pin {
@@ -32,11 +33,26 @@ module.exports = gql`
     apiKey: String
   }
 
+  input CreatePinInput {
+    title: String
+    image: String
+    content: String
+    latitude: Float
+    longitude: Float
+  }
+
   type Query {
     getUser: User
     getMapboxKey: mapboxApi 
+    getPins: [Pin!]
     
   }
 
+  type Mutation {
+    createPin(input: CreatePinInput!): Pin
+    deletePin(pinId: ID!): Pin
+    createComment(pinId: ID!, text: String!): Pin
+
+  }
  
 `;

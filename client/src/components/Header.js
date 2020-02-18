@@ -27,6 +27,7 @@ const Header = ({ classes }) => {
           {/* current User info  */}
           {currentUser && (
             <div className={classes.grow}>
+              
               <img
                 className={classes.picture}
                 src={currentUser.picture}
@@ -65,7 +66,7 @@ const styles = theme => ({
     display: "none"
   },
   picture: {
-    height: "50px",
+    height: "30px",
     borderRadius: "90%",
     marginRight: theme.spacing.unit * 2
   }

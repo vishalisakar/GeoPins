@@ -7,4 +7,4 @@ const UserSchema = mongoose.Schema({
     picture: String
 })
 
-module.exports = mongoose.model("user", UserSchema)
+module.exports = mongoose.model("User", UserSchema)
