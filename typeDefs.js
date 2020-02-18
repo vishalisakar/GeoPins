@@ -23,7 +23,6 @@ module.exports = gql`
   }
 
   type Comment {
-    _id: ID
     text: String
     createdAt: String
     author: User
@@ -51,8 +50,16 @@ module.exports = gql`
   type Mutation {
     createPin(input: CreatePinInput!): Pin
     deletePin(pinId: ID!): Pin
-    createComment(pinId: ID!, text: String!): Pin
+    createComment(pinId: ID!, text: String!): Pin 
+    
 
   }
+ 
+  type Subscription {
+    pinAdded: Pin
+    pinDeleted: Pin
+    pinUpdated: Pin
+  }
+
  
 `;

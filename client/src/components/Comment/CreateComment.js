@@ -5,24 +5,26 @@ import IconButton from "@material-ui/core/IconButton";
 import ClearIcon from "@material-ui/icons/Clear";
 import SendIcon from "@material-ui/icons/Send";
 import Divider from "@material-ui/core/Divider";
+import Context from "../../context";
 import { CREATE_COMMENT_MUTATION } from "../../graphql/mutations";
 import { useClient } from "../../client";
-import Context from "../../context";
+// import { GraphQLClient } from 'graphql-request';
 
 const CreateComment = ({ classes }) => {
   const client = useClient();
-  const { state, dispatch } = useContext(Context);
+  const { state } = useContext(Context);
   const [comment, setComment] = useState("");
+
   
   const handleSubmitComment = async () => {
-    const variables = { pindId: state.currentPin._id, text: comment };
-    const { createComment } = await client.request(
-      CREATE_COMMENT_MUTATION,
-      variables
-    );
-    dispatch({ type: "CREATE_COMMENT", payload: createComment });
+    const variables = { pinId: state.currentPin._id, text: comment };
+    await client.request(CREATE_COMMENT_MUTATION, variables);
+   
+    // dispatch({ type: "CREATE_COMMENT", payload: createComment });
+
     setComment("");
   };
+
   return (
     <>
       <form className={classes.form}>

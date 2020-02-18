@@ -5,11 +5,12 @@ import Toolbar from "@material-ui/core/Toolbar";
 import MapIcon from "@material-ui/icons/Map";
 import Typography from "@material-ui/core/Typography";
 import Context from "./../context";
-import Signout from '../components/Auth/Signout';
+import Signout from "../components/Auth/Signout";
 
-
+import { unstable_useMediaQuery as useMediaQuery } from "@material-ui/core/useMediaQuery";
 
 const Header = ({ classes }) => {
+  const mobileSize = useMediaQuery("(max-width: 650px)");
   const { state } = useContext(Context);
   const { currentUser } = state;
 
@@ -20,28 +21,34 @@ const Header = ({ classes }) => {
           {/* title / logo */}
           <div className={classes.grow}>
             <MapIcon className={classes.icon} />
-            <Typography component="h1" variant="h6" color="inherit" noWrap>
+
+            <Typography
+              className={mobileSize ? classes.mobile : ""}
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+            >
               GeoPins
             </Typography>
           </div>
           {/* current User info  */}
           {currentUser && (
             <div className={classes.grow}>
-              
               <img
                 className={classes.picture}
                 src={currentUser.picture}
                 alt={currentUser.name}
-              >
-                </img>
-              <Typography variant="h5" color="inherit" noWrap>
+              ></img>
+              <Typography 
+              className={mobileSize ? classes.mobile : ""}
+              variant="h5" color="inherit" noWrap>
                 {currentUser.name}
               </Typography>
             </div>
           )}
           {/* signout button */}
           <Signout />
-
         </Toolbar>
       </AppBar>
     </div>

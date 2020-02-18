@@ -12,13 +12,13 @@ const Login = ({ classes }) => {
 
   const onSuccess = async googleUser => {
     try {
-      const idToken =  await googleUser.getAuthResponse().id_token;
+      const idToken = await  googleUser.getAuthResponse().id_token;
 
 
       console.log({ idToken });
       /* sending the id token to the server  */
       // const url = BASE_URL;
-      const client = new GraphQLClient(BASE_URL, {
+      const client = await new GraphQLClient(BASE_URL, {
         headers: { authorization: idToken }
       });
 
@@ -41,6 +41,10 @@ const Login = ({ classes }) => {
 
   const onFailure = err => {
     console.error("Error logging in", err);
+    dispatch({
+      type: "IS_LOGGED_IN",
+      payload: false
+    });
   };
 
   return (

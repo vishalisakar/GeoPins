@@ -56,12 +56,33 @@ export default function reducer(state, { type, payload }) {
     case "DELETE_PIN":
       const deletedPin = payload;
       const filterdPins = state.pins.filter(pin => pin._id !== deletedPin._id);
+      if(state.currentPin) {
+         const isCurrentPin = deletedPin._id === state.currentPin._id
+         if(isCurrentPin) {
+          return {
+            ...state,
+            pins: filterdPins,
+            currentPin: null
+          }
+         }
+      }
       return {
         ...state,
-        pins: filterdPins,
-        currentPin: null
+        pins: filterdPins
+        
       };
       case "CREATE_COMMENT":
+        const updatedCurrentPin = payload
+        // find and replace
+       const updatedPins = state.pins.map(pin => 
+          pin._id === updatedCurrentPin ? updatedCurrentPin : pin
+          )
+          return{
+            ...state,
+            pins: updatedPins,
+            currentPin: updatedCurrentPin
+          }
+      /* case "CREATE_COMMENT":
         const updatedCurrentPin = payload
         // find and repalce
          const updatedPins = state.pins.map(pin =>
@@ -73,7 +94,7 @@ export default function reducer(state, { type, payload }) {
             ...state,
             pins: updatedPins,
             currentPin: updatedCurrentPin
-          }
+          } */
     default:
       return state;
   }
