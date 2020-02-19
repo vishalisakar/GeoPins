@@ -49,7 +49,7 @@ const server = new ApolloServer({
 
 
 /* checking the server is working */
-server.listen().then(({ url }) => {
+server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
   console.log(`server listening on ${url}`);
 });
 
